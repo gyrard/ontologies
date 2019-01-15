@@ -34,8 +34,8 @@
      xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
      xmlns:dc="http://purl.org/dc/elements/1.1/">
     <owl:Ontology rdf:about="http://purl.org/kao#">
-        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-08-21</dcterms:modified>
-        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</owl:versionInfo>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-01-14</dcterms:modified>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.4</owl:versionInfo>
         <dc:description xml:lang="en">The kHealth Asthma Ontology (kAO) is used to semantically annotate and deduce high level abstractions from datasets provided by the kHealth project.</dc:description>
         <dc:creator rdf:resource="mailto:amelie@knoesis.org"/>
         <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-19</dcterms:issued>
@@ -46,9 +46,6 @@
         <rdfs:comment xml:lang="en">The kHealth Asthma Ontology (kAO) is used to semantically annotate and deduce high level abstractions from datasets provided by the kHealth project.</rdfs:comment>
         <vann:preferredNamespaceUri>http://purl.org/kao#</vann:preferredNamespaceUri>
     </owl:Ontology>
-    
-
-
 
 	<!--	
 	Difference between rdf:ID and rdf:about
@@ -56,6 +53,11 @@
 	-->
 	
 	<!--	
+	
+	Last updated: November 2018
+	- medication concepts not fully compliant with AO ontology from BioPortal
+	- numerous improvements, Patient concepts, hasSymptoms, hasTherapy etc.
+	
 	Last updated: August 2018
 	- recommendation HighPollen -> Do not go out mechanism for the recommendation system
 	- attempt to design the patient, age, height, weight and reuse ontologies, not so easy
@@ -82,6 +84,807 @@
 	  <!-- ####################################################################################
  	     ################# Labels and comments are important for ontology matching, automatic documentation, etc. ############## 
  	     #################################################################################### -->
+
+	 
+	 <!-- generate issue under protege if rdf:ID and not rdf:about -->
+	<owl:Class rdf:about="http://purl.org/kao#Patient">		
+ 		<rdfs:label xml:lang="en">Patient</rdfs:label>
+        <rdfs:comment xml:lang="en">Description of the patient. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="https://schema.org/Person"/>	
+		<foaf:age rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal"/>	
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-20</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-08-07</dcterms:issued>
+        <rdfs:seeAlso rdf:resource="http://dbpedia.org/ontology/Person"/>
+		<rdfs:seeAlso rdf:resource="http://xmlns.com/foaf/0.1/Person"/>			
+	</owl:Class>
+	
+		 <!-- person datatype properties but for generic reasoning mechanism better as classes and subclass of sosa: -->
+	 
+	 		
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_id_test_symptom_CannotTalkInFullSentence">		
+		<rdfs:label xml:lang="en">Patient id number test symptom CannotTalkInFullSentence</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient id number test symptom CannotTalkInFullSentence</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<foaf:age rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</foaf:age>
+		<kao:hasSymptom rdf:resource="http://purl.org/kao#CannotTalkInFullSentence"/>
+		<kao:hasTherapy rdf:resource="http://purl.org/kao#Ventolin"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>	
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasWokeUpLastNight rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</kao:hasWokeUpLastNight>	
+	</owl:NamedIndividual>
+
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_id_test_symptom_Cough">		
+		<rdfs:label xml:lang="en">Patient id number test symptom Cough</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient id number test symptom Cough</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000087"/> <!-- Cough -->
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_id_test_symptom_Wheeze">		
+		<rdfs:label xml:lang="en">Patient id number test symptom Wheeze</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient id number test symptom Wheeze</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000088"/> <!-- Wheeze -->
+	</owl:NamedIndividual>	
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_id_test_symptom_ChestTightness">		
+		<rdfs:label xml:lang="en">Patient id number test symptom ChestTightness</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient id number test symptom ChestTightness</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000084"/><!-- Chest tightness -->
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_id_test_symptom_ShortnessBreath">		
+		<rdfs:label xml:lang="en">Patient id number test symptom ShortnessBreath</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient id number test symptom ShortnessBreath</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000086"/><!-- Shortness of breath or hard and fast breathing -->
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_id_test_symptom_NoseOpenWide">		
+		<rdfs:label xml:lang="en">Patient id number test symptom NoseOpenWide</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient id number test symptom NoseOpenWide</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://purl.org/kao#NoseOpenWide"/><!-- NoseOpenWide -->
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_id_test_symptom_AirwayInflammation">		
+		<rdfs:label xml:lang="en">Patient id number test symptom AirwayInflammation</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient id number test symptom AirwayInflammation</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000085"/><!-- AirwayInflammation -->
+	</owl:NamedIndividual>	
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_scenario_test_allergy_riskFactors">		
+		<rdfs:label xml:lang="en">Patient scenario test has allergies (e.g., pollen, high pollution, nuts, gluten).</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient scenario test has allergies (e.g., pollen, high pollution, nuts, gluten).</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasRiskFactor rdf:resource="http://kmi.open.ac.uk/projects/smartproducts/ontologies/food.owl#Nuts"/>	
+		<kao:hasRiskFactor rdf:resource="http://kmi.open.ac.uk/projects/smartproducts/ontologies/food.owl#Gluten"/>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-12</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-12</dcterms:issued>
+	</owl:NamedIndividual>
+ 
+ 	 <owl:DatatypeProperty rdf:ID="hasDiet">
+		<rdfs:label xml:lang="en">hasDiet</rdfs:label>
+		<rdfs:comment xml:lang="en">A patient has diet. Useful for kHealth projects (e.g., bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-07</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-07</dcterms:issued>
+        <rdfs:domain rdf:resource="https://schema.org/Person"/>
+ 		<!-- <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/> -->
+	</owl:DatatypeProperty>	
+		
+	<owl:DatatypeProperty rdf:ID="hasIngestedCalorie">
+		<rdfs:label xml:lang="en">hasIngestedCalorie</rdfs:label>
+		<rdfs:comment xml:lang="en">A patient has ingested Y calories in Joules. Useful for kHealth projects (e.g., bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-12</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-12</dcterms:issued>
+        <rdfs:domain rdf:resource="https://schema.org/Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:seeAlso rdf:resource="https://schema.org/calories"/>
+        <rdfs:seeAlso rdf:resource="http://dbpedia.org/ontology/approximateCalories"/>
+         <rdfs:seeAlso rdf:resource="http://projects.kmi.open.ac.uk/smartproducts/ontologies/latest/food.owl#MaxCaloriesPreference"/>       		
+	</owl:DatatypeProperty>	
+	
+	 <owl:DatatypeProperty rdf:ID="hasBodyMassIndex">
+		<rdfs:label xml:lang="en">hasBodyMassIndex</rdfs:label>
+		<rdfs:comment xml:lang="en">A patient has Body Mass Index (BMI). Useful for kHealth projects (e.g., bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-07</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-07</dcterms:issued>
+        <rdfs:domain rdf:resource="https://schema.org/Person"/>
+ 		<!-- <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/> -->
+	</owl:DatatypeProperty>		
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_scenario_test_calorie">		
+		<rdfs:label xml:lang="en">Patient scenario test has calories</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient scenario test has calories</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasIngestedCalorie rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1200</kao:hasIngestedCalorie>
+	</owl:NamedIndividual>
+		
+	 <owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_scenario_test_has_diet_chocolate">		
+		<rdfs:label xml:lang="en">Patient scenario test has diet chocolate</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient scenario test has diet chocolate</rdfs:comment>
+		<kao:hasDiet>Chocolate</kao:hasDiet>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<schema:height rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.87</schema:height>
+		<schema:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">110</schema:weight>
+	</owl:NamedIndividual>	 
+	
+ 	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_scenario_test_has_diet_chocolate_smart_profucts_food">		
+		<rdfs:label xml:lang="en">Patient scenario test has diet chocolate</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient scenario test has diet chocolate</rdfs:comment>
+		<kao:hasDiet rdf:resource="http://kmi.open.ac.uk/projects/smartproducts/ontologies/food.owl#Chocolate"/>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<schema:height rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.87</schema:height>
+		<schema:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">110</schema:weight>
+	</owl:NamedIndividual>
+		 	 
+ 	 	 
+ 	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_scenario__test_weight_height">		
+		<rdfs:label xml:lang="en">Patient scenario test weight and height</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient scenario test weight and height</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<schema:height rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.87</schema:height>
+		<schema:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">79</schema:weight>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_scenario__test_bmi">		
+		<rdfs:label xml:lang="en">Patient scenario test Body Mass Index (BMI) - 59 kg, 1m70, bmi 20.41 </rdfs:label>
+		<rdfs:comment xml:lang="en">Patient scenario test Body Mass Index (BMI) - 59 kg, 1m70, bmi 20.41</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<schema:height rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.70</schema:height>
+		<schema:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">59</schema:weight>
+	</owl:NamedIndividual>
+	
+ 	 
+ 	  
+	 
+ 	    <!-- ####################################################################################
+ 	     ################# PATIENT SCENARIO: age, weight, etc. ############## 
+ 	     #################################################################################### -->
+ 	     
+ 	     
+ 	      	      
+
+ 	 	  
+ 	 	  
+ 	<!-- ####################################################################################
+ 	     ################# Asthma Control LEVEL ############## 
+ 	     #################################################################################### -->
+ 	 	    
+ 	<owl:Class rdf:ID="AsthmaLevelWellControlled_Age_0_4">
+		<rdfs:label xml:lang="en">Asthma Level Well Controlled (Age: 0-4 years)</rdfs:label>
+		<rdfs:comment xml:lang="en">Asthma Level Well Controlled (Age: 0-4 years)</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-28</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-28</dcterms:issued>     
+	</owl:Class>		
+	
+	<owl:Class rdf:ID="AsthmaLevelNotWellControlled">
+		<rdfs:label xml:lang="en">Asthma Level Not Well Controlled</rdfs:label>
+		<rdfs:comment xml:lang="en">Asthma Level Not Well Controlled</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-28</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-28</dcterms:issued>     
+	</owl:Class>  
+	
+	<owl:Class rdf:ID="AsthmaLevelVeryPoorlyControlled">
+		<rdfs:label xml:lang="en">Asthma Level Very Poorly Controlled</rdfs:label>
+		<rdfs:comment xml:lang="en">Asthma Level Very Poorly Controlled</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-28</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-28</dcterms:issued>     
+	</owl:Class>  
+	
+	 	 	       <!-- ####################################################################################
+ 	     ################# FROM UTKARSHANI ############## 
+ 	     #################################################################################### -->
+	
+	<owl:Class rdf:ID="AlbuterolInhalerDueToAsthmaSymptoms">
+		<rdfs:label xml:lang="en">AlbuterolInhalerDueToAsthmaSymptoms</rdfs:label>
+		<rdfs:comment xml:lang="en">AlbuterolInhalerDueToAsthmaSymptoms</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:issued>  
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>   
+	</owl:Class>
+	
+	<owl:Class rdf:ID="AlbuterolLastNightDueToCoughOrWheeze">
+		<rdfs:label xml:lang="en">AlbuterolLastNightDueToCoughOrWheeze</rdfs:label>
+		<rdfs:comment xml:lang="en">AlbuterolLastNightDueToCoughOrWheeze</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:issued>  
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>   
+	</owl:Class>
+	
+	<owl:Class rdf:ID="AsthmaSymptomLimitActivityToday">
+		<rdfs:label xml:lang="en">AsthmaSymptomLimitActivityToday</rdfs:label>
+		<rdfs:comment xml:lang="en">AsthmaSymptomLimitActivityToday</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:issued>  
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>   
+	</owl:Class>
+	
+	<owl:Class rdf:ID="WokeUpWithCoughOrWheezeLastNight">
+		<rdfs:label xml:lang="en">WokeUpWithCoughOrWheezeLastNight</rdfs:label>
+		<rdfs:comment xml:lang="en">WokeUpWithCoughOrWheezeLastNight</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:issued>  
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>   
+	</owl:Class>
+	
+	 <owl:ObjectProperty rdf:ID="hasAlbuterolInhalerDueToAsthmaSymptoms">
+		<rdfs:label xml:lang="en">hasAlbuterolInhalerDueToAsthmaSymptoms</rdfs:label>
+		<rdfs:comment xml:lang="en">hasAlbuterolInhalerDueToAsthmaSymptoms</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:issued>
+        <rdfs:domain rdf:resource="https://schema.org/Person"/>
+ 		<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/> <!-- according to the questionnaire we have a binary answer the patient ... -->
+	</owl:ObjectProperty>	
+	
+	<owl:ObjectProperty rdf:ID="hasAlbuterolLastNightDueToCoughOrWheeze">
+		<rdfs:label xml:lang="en">hasAlbuterolLastNightDueToCoughOrWheeze</rdfs:label>
+		<rdfs:comment xml:lang="en">hasAlbuterolLastNightDueToCoughOrWheeze</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:issued>
+        <rdfs:domain rdf:resource="https://schema.org/Person"/>
+ 		<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/> <!-- according to the questionnaire we have a binary answer the patient ... -->
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:ID="hasLimitedActivityDueToAsthmaSymptoms">
+		<rdfs:label xml:lang="en">hasLimitedActivityDueToAsthmaSymptoms</rdfs:label>
+		<rdfs:comment xml:lang="en">hasLimitedActivityDueToAsthmaSymptoms</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:issued>
+        <rdfs:domain rdf:resource="https://schema.org/Person"/>
+ 		<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/> <!-- according to the questionnaire we have a binary answer the patient ... -->
+	</owl:ObjectProperty>	
+ 	 	    
+ 	 	       <!-- ####################################################################################
+ 	     ################# PATIENT SCENARIO: hasNightimeAwakenings ############## 
+ 	     #################################################################################### -->
+ 	 	    
+ 	<owl:DatatypeProperty rdf:ID="hasWokeUpLastNight">
+		<rdfs:label xml:lang="en">hasWokeUpLastNight, nightime awakenings</rdfs:label>
+		<rdfs:comment xml:lang="en">A patient has nightime awakenings. Useful to define the asthma control level according to the National Heart, Lung, and Blood Institute (NHLBI) guidelines of the National Institutes of Health. Document: Asthma Care Quick Reference DIAGNOSING AND MANAGING ASTHMA</rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-27</dcterms:issued>
+        <rdfs:domain rdf:resource="https://schema.org/Person"/>
+ 		<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/> <!-- according to the questionnaire we have a binary answer the patient awaken during the night or not -->
+	</owl:DatatypeProperty>	
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_id_KH026">		
+		<rdfs:label xml:lang="en">Patient id number KH026 - Real patient example (symptoms), Male</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient id number KH026 - Real patient example (symptoms), Male</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<foaf:age rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</foaf:age>
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000087"/> <!-- Cough -->
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000088"/> <!-- Wheeze -->
+		<kao:hasTherapy rdf:resource="http://purl.org/kao#Ventolin"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>	
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasWokeUpLastNight rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</kao:hasWokeUpLastNight>	
+	</owl:NamedIndividual>
+	
+		<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_id_KH032">		
+		<rdfs:label xml:lang="en">Patient id number KH032 - Real patient example (symptoms), Male</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient id number KH032 - Real patient example (symptoms), Male</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<foaf:age rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">13</foaf:age>
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000087"/> <!-- Cough -->
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000088"/> <!-- Wheeze -->
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000084"/> <!-- Chest tightness -->
+		<kao:hasSymptom rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000086"/> <!-- Shortness of breath or hard and fast breathing -->
+		<kao:hasTherapy rdf:resource="http://purl.org/kao#Ventolin"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>	
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasWokeUpLastNight rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</kao:hasWokeUpLastNight>	
+	</owl:NamedIndividual>
+	
+	
+ 	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_scenario__InhalerControllerMedication">		
+		<rdfs:label xml:lang="en">Patient scenario Inhaler Controller Medication (e.g., Symbicort)</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient scenario Inhaler Controller Medication (e.g., Symbicort)</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://purl.org/kao#Cough"/>
+		<kao:hasTherapy rdf:resource="http://purl.org/kao#Symbicort"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>	
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasWokeUpLastNight rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</kao:hasWokeUpLastNight>	
+	</owl:NamedIndividual>
+	
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_hasWokeUpLastNightScenario">		
+		<rdfs:label xml:lang="en">Patient scenario has woke up last night</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient scenario  has woke up last night</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://purl.org/kao#Cough"/>
+		<kao:hasTherapy rdf:resource="http://purl.org/kao#Proair"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>	
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasWokeUpLastNight rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</kao:hasWokeUpLastNight>	
+	</owl:NamedIndividual>
+	
+	
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_scenario__InhalerRescueMedication">		
+		<rdfs:label xml:lang="en">Patient scenario Inhaler Rescue Medication (e.g., Proair)</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient scenario Inhaler Rescue Medication (e.g., Proair)</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://purl.org/kao#Cough"/>
+		<kao:hasTherapy rdf:resource="http://purl.org/kao#Proair"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>	
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasWokeUpLastNight rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</kao:hasWokeUpLastNight>	
+	</owl:NamedIndividual>
+	
+	
+		<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_example_WellControlled">		
+		<rdfs:label xml:lang="en">Patient example Asthma Well Controlled</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient example Asthma Well Controlled</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://purl.org/kao#Cough"/>
+		<kao:hasTherapy rdf:resource="http://purl.org/kao#Ventolin"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>	
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasWokeUpLastNight rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</kao:hasWokeUpLastNight>	
+	</owl:NamedIndividual>
+	
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_example_VeryPoorlyControlled">		
+		<rdfs:label xml:lang="en">Patient example Asthma Very Poorly Controlled</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient example Asthma Very Poorly Controlled</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://purl.org/kao#Cough"/>
+		<kao:hasTherapy rdf:resource="http://purl.org/kao#Ventolin"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>	
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasWokeUpLastNight rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</kao:hasWokeUpLastNight>	
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_example_NotWellControlled">		
+		<rdfs:label xml:lang="en">Patient example Asthma Not Well Poorly Controlled</rdfs:label>
+		<rdfs:comment xml:lang="en">Patient example Asthma Not Well Poorly Controlled</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasSymptom rdf:resource="http://purl.org/kao#Cough"/>
+		<kao:hasTherapy rdf:resource="http://purl.org/kao#Ventolin"/>
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#PollenLevel"/>	
+		<kao:hasRiskFactor rdf:resource="http://purl.org/kao#AirQualityIndex"/>
+		<kao:hasWokeUpLastNight rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</kao:hasWokeUpLastNight>	
+	</owl:NamedIndividual>
+ 	 	    
+ 	 	    
+ 	 	    
+ 	 	    
+ 	 	    
+ 	 	    <!-- ####################################################################################
+ 	     ################# TEST VENTOLIN SCENARIO COPY PASTE FROM DRUG ONTOLOGY XNORM ############## 
+ 	     #################################################################################### -->   
+ 	   <!-- Source: https://bioportal.bioontology.org/ontologies/DRON?p=classes&conceptid=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FDRON_00069541 
+ 	   <obo:DRON_00010000 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">104504</obo:DRON_00010000>
+ 	   -->
+
+	<!-- faster to load rather than loading the entire ontology -->
+
+  <rdf:Description rdf:about="http://purl.obolibrary.org/obo/DRON_00069541">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Albuterol 0.05 MG/ML Injectable Solution [Ventolin]</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/DRON_00040029"/>    
+  </rdf:Description>
+
+ 	     		
+	<owl:DatatypeProperty rdf:ID="hasTherapy">
+		<rdfs:label xml:lang="en">hasTherapy, hasMedication</rdfs:label>
+		<rdfs:comment xml:lang="en">A patient has therapy (e.g., resuce medication, controller medication)</rdfs:comment>
+	</owl:DatatypeProperty>
+	
+
+	
+
+   
+   
+   	
+			<!-- ####################################################################################
+ 	     ################# AO ONTOLOGY RISK FACTORS HIERARCHY ############## 
+ 	     #################################################################################### -->
+	
+	<owl:DatatypeProperty rdf:ID="hasRiskFactor">
+		<rdfs:label xml:lang="en">hasRiskFactor</rdfs:label>
+		<rdfs:comment xml:lang="en">A patient has risk factors from its environments (e.g., air quality, pollen, temperature, humidity)</rdfs:comment>
+	</owl:DatatypeProperty>
+	
+	 <!-- http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000061 -->
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000061">
+        <rdfs:label xml:lang="en">Risk factors</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000062 -->
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000062">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000061"/>
+        <rdfs:label xml:lang="en">Allergens</rdfs:label>
+    </owl:Class>
+    
+   
+   
+ 	     	<!-- ####################################################################################
+ 	     ################# SYMPTOMS ############## 
+ 	     #################################################################################### -->  
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-EPI_0000034">
+        <rdfs:label xml:lang="en">Symptoms</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+        
+   <owl:ObjectProperty rdf:ID="hasSymptom">
+		<rdfs:label xml:lang="en">hasSymptom</rdfs:label>
+		<rdfs:comment xml:lang="en">The hasSymptom property is used for to describe the number of symptoms and which ones the patient have. </rdfs:comment>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-20</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-20</dcterms:issued>   
+        <rdfs:domain rdf:resource="https://schema.org/Person"/>
+ 		<rdfs:range  rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-EPI_0000034"/> <!-- symptom fron ao -->
+	</owl:ObjectProperty>
+
+ 	  	  
+ 	  	<!-- ####################################################################################
+ 	     ################# RESCUE MEDICATION: Albuterol, Atrovent ############## 
+ 	     #################################################################################### -->  
+	
+	
+	 <owl:Class rdf:ID="RescueMedication">		
+		<rdfs:label xml:lang="en">Rescue Medication</rdfs:label>
+		<rdfs:comment xml:lang="en">Rescue Medication. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+		<rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-EPI_0000036"/>		
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+        <rdfs:seeAlso rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>	<!-- Controller from BioPortal Asthma Ontology -->
+	</owl:Class>	
+	
+	<owl:Class rdf:ID="InhalerRescueMedication">		
+		<rdfs:label xml:lang="en">Inhaler Rescue Medication</rdfs:label>
+		<rdfs:comment xml:lang="en">Inhaler Rescue Medication. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="http://purl.org/kao#RescueMedication"/> 
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+	</owl:Class>	
+	
+  <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000111">
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerRescueMedication"/>
+        <rdfs:label xml:lang="en">Albuterol</rdfs:label>
+        <rdfs:comment xml:lang="en">Albuterol is an inhaler rescue medication according to our survey filled by the pediatric asthma physician that we are collaborating with. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+    </owl:Class>
+    
+   <owl:Class rdf:ID="Ventolin">
+        <rdfs:label xml:lang="en">Ventolin</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerRescueMedication"/>
+        <rdfs:comment xml:lang="en">Ventolin is an inhaler rescue medication according to our survey filled by the pediatric asthma physician that we are collaborating with. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-26</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+        <rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/DRON_00069541"/> <!-- Albuterol 0.05 MG/ML Injectable Solution [Ventolin] -->
+    </owl:Class>
+    
+   <owl:Class rdf:ID="Proair">
+        <rdfs:label xml:lang="en">Proair</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerRescueMedication"/>
+        <rdfs:comment xml:lang="en">Proair is an inhaler rescue medication according to our survey filled by the pediatric asthma physician that we are collaborating with. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+    </owl:Class>
+    
+    <owl:Class rdf:ID="Xoponex">
+        <rdfs:label xml:lang="en">Xoponex</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerRescueMedication"/>
+        <rdfs:comment xml:lang="en">Xoponex is an inhaler rescue medication according to our survey filled by the pediatric asthma physician that we are collaborating with. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+    </owl:Class>
+    
+     <!-- not available within the bioportal asthma ontology so we add it -->
+     <owl:Class rdf:ID="Atrovent">
+        <rdfs:label xml:lang="en">Atrovent</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerRescueMedication"/>
+        <rdfs:comment xml:lang="en">Atrovent is an inhaler rescue medication according to our survey filled by the pediatric asthma physician that we are collaborating with. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+    </owl:Class>
+    
+    <owl:Class rdf:ID="Combivent">
+        <rdfs:label xml:lang="en">Combivent</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerRescueMedication"/>
+        <rdfs:comment xml:lang="en">Combivent is an inhaler rescue medication according to our survey filled by the pediatric asthma physician that we are collaborating with. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+    </owl:Class>
+    
+    <owl:Class rdf:ID="Duoneb">
+        <rdfs:label xml:lang="en">Duoneb</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerRescueMedication"/>
+        <rdfs:comment xml:lang="en">Duoneb is an inhaler rescue medication according to our survey filled by the pediatric asthma physician that we are collaborating with. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+    </owl:Class>
+    
+    
+
+	
+	
+	 	  	<!-- ####################################################################################
+ 	     ################# Controller medication: dulera singulair  ############## 
+ 	     #################################################################################### -->  
+	
+	<!-- we do not have dulera in bioportal asthma ontology -->
+	<!-- we do not have singulair in bioportal asthma ontology -->
+	<!-- we do not have  in bioportal asthma ontology -->
+	
+	<owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-EPI_0000036"/>
+        <rdfs:label xml:lang="en">Controller Medication</rdfs:label>
+        <rdfs:comment xml:lang="en">Controller Medication. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>	
+        
+    <owl:Class rdf:ID="InhalerController">		
+		<rdfs:label xml:lang="en">Inhaler Controller Medication</rdfs:label>
+		<rdfs:comment xml:lang="en">Inhaler Controller Medication. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/> <!-- Controller from BioPortal Asthma Ontology -->
+		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-12</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+	</owl:Class>		
+	
+	<owl:Class rdf:ID="OralSteroidController">		
+		<rdfs:label xml:lang="en">Oral Steroid Medication Controller</rdfs:label>
+		<rdfs:comment xml:lang="en">Oral Steroid Controller Medication. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/> <!-- Controller from BioPortal Asthma Ontology -->
+		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-12-12</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:issued>
+	</owl:Class>	
+	
+	<owl:Class rdf:ID="Prednisone">
+        <rdfs:label xml:lang="en">Prednisone</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#OralSteroidController"/>
+        <rdfs:comment xml:lang="en">Prednisone is an oral steroid controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>	
+    
+    <owl:Class rdf:ID="Orapred">
+        <rdfs:label xml:lang="en">Orapred</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#OralSteroidController"/>
+        <rdfs:comment xml:lang="en">Orapred is an oral steroid controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+    <owl:Class rdf:ID="Montelukast">
+        <rdfs:label xml:lang="en">Montelukast</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#OralSteroidController"/>
+        <rdfs:comment xml:lang="en">Montelukast is an oral steroid controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+    <owl:Class rdf:ID="Singulair">
+        <rdfs:label xml:lang="en">Singulair</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#OralSteroidController"/>
+        <rdfs:comment xml:lang="en">Singulair is an oral steroid controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>    
+	
+	  <owl:Class rdf:ID="Dulera">
+        <rdfs:label xml:lang="en">Dulera</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerController"/>
+        <rdfs:comment xml:lang="en">Dulera is an inhaler controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+   <owl:Class rdf:ID="Symbicort">
+        <rdfs:label xml:lang="en">Symbicort</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerController"/>
+        <rdfs:comment xml:lang="en">Symbicort is an inhaler controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+       <owl:Class rdf:ID="Advair">
+        <rdfs:label xml:lang="en">Advair</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerController"/> 
+        <rdfs:comment xml:lang="en">Advair is an inhaler controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+       <owl:Class rdf:ID="Flovent">
+        <rdfs:label xml:lang="en">Flovent</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerController"/>
+        <rdfs:comment xml:lang="en">Flovent is an inhaler controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+       <owl:Class rdf:ID="Asmanex">
+        <rdfs:label xml:lang="en">Asmanex</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerController"/>
+        <rdfs:comment xml:lang="en">Asmanex is an inhaler controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+       <owl:Class rdf:ID="Qvar">
+        <rdfs:label xml:lang="en">Qvar</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerController"/>
+        <rdfs:comment xml:lang="en">Qvar is an inhaler controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+       <owl:Class rdf:ID="Pulmicort">
+        <rdfs:label xml:lang="en">Pulmicort</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerController"/>
+        <rdfs:comment xml:lang="en">Pulmicort is an inhaler controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+       <owl:Class rdf:ID="Budesonide">
+        <rdfs:label xml:lang="en">Budesonide</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/kao#InhalerController"/>
+        <rdfs:comment xml:lang="en">Budesonide is an inhaler controller medication according to our survey filled by the pediatric asthma physician that we are collaborating with. This concept was not found within the BioPortal Asthma ontology. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-15</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+
+     	    
+   <!-- Long-acting bronchodiltator and Controller are 2 different concepts in BioPortal AO ontology, for us it is the same thing -->
+
+
+<!--
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000109">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Long-acting bronchodiltator</rdfs:label>
+         <rdfs:comment xml:lang="en">Long-acting bronchodiltator is another name for controller medication. Useful for kHealth projects (e.g., asthma) at Knoesis.</rdfs:comment>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-11-13</dcterms:issued>
+    </owl:Class>
+    
+    -->	
+		<!-- ####################################################################################
+ 	     ################# AO Controller Hierarchy ############## 
+ 	     #################################################################################### -->
+	
+     <!-- November 2018: AO Controller Hierarchy from BioPortal AO not relevant for our asthma project  -->
+
+     <!-- 
+     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000110">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Levalbuterol</rdfs:label>
+    </owl:Class> 
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000112">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Mast cell stabilizer</rdfs:label>
+    </owl:Class> 
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000113">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Cromolyn</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000114">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Salmeterol</rdfs:label>
+    </owl:Class>
+    
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000115">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Theophyllines</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000117">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Nedocromil sodium</rdfs:label>
+    </owl:Class>
+    
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000118">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Ketotifen</rdfs:label>
+    </owl:Class>
+    
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000119">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Sodium chromoglycate</rdfs:label>
+    </owl:Class>
+ 
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000120">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Zafirlukast</rdfs:label>
+    </owl:Class>
+  
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000121">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Montelukast</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000122">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Leukotriene receptor antagonists (LTRA)</rdfs:label>
+    </owl:Class>
+ 
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000123">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Inhaled corticosteriods</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000124">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Omalizumab</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000125">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Low-dose inhaled corticosteriods (ICS)</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000126">
+        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
+        <rdfs:label xml:lang="en">Corticosteroids</rdfs:label>
+    </owl:Class>
+	
+    -->
+
+    
+
+ 	  	  
+ 	     
+ 	    <!-- ####################################################################################
+ 	     ################# ASTHMA CONTROL LEVEL ############## 
+ 	     #################################################################################### -->
+ 	     
+ 	 <owl:Class rdf:ID="AsthmaControlLevel">		
+		<rdfs:label xml:lang="en">Asthma Control Level</rdfs:label>
+		<rdfs:comment xml:lang="en">Asthma Control Level. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-10-04</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-10-04</dcterms:issued>
+	</owl:Class>
+	
+	 <owl:Class rdf:ID="AsthmaYellowZone">		
+		<rdfs:label xml:lang="en">Asthma Yellow Zone</rdfs:label>
+		<rdfs:comment xml:lang="en">Yellow Zone: 50 to 80 percent of your usual or "normal" peak flow rate signals caution. It is a time for decisions. Your airways are narrowing and may require extra treatment. Your symptoms can get better or worse depending on what you do, or how and when you use your prescribed medication. You and your healthcare provider should have a plan for yellow zone readings. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:issued>
+	</owl:Class>
+		    
+	  <owl:Class rdf:ID="AsthmaRedZone">		
+		<rdfs:label xml:lang="en">Asthma Red Zone</rdfs:label>
+		<rdfs:comment xml:lang="en">Red Zone: Less than 50 percent of your usual or "normal" peak flow rate signals a Medical Alert. Immediate decisions and actions need to be taken. Severe airway narrowing may be occurring. Take your rescue medications right away. Contact your healthcare provider now and follow the plan he has given you for red zone readings. Some healthcare providers may suggest zones with a smaller range, such as 90 to 100 percent. Always follow your healthcare provider's suggestions about your peak flow rate. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:issued>
+	</owl:Class>	
+	 	     
+ 	 <owl:Class rdf:ID="AsthmaGreenZone">		
+		<rdfs:label xml:lang="en">Asthma Green Zone</rdfs:label>
+		<rdfs:comment xml:lang="en">Green Zone: 80 to 100 percent of your usual or "normal" peak flow rate signals all clear. A reading in this zone means that your asthma is under reasonably good control. It would be advisable to continue your prescribed program of management. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
+		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:issued>
+	</owl:Class>
+		    
+	
  	    
  	    <!-- ####################################################################################
  	     ################# POLLEN RECOMMENDATION EXAMPLE ############## 
@@ -137,14 +940,6 @@
         <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-19</dcterms:issued>
 	</owl:Class>
 	
-	<owl:Class rdf:ID="LowPollenLevel">		
-		<rdfs:label xml:lang="en">Low Pollen Level</rdfs:label>
-		<rdfs:comment xml:lang="en"></rdfs:comment>
-		<rdfs:subClassOf rdf:resource="#PollenLevel"/>	
-		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-19</dcterms:modified> 
-        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-19</dcterms:issued>
-	</owl:Class>
-	
 	<owl:Class rdf:ID="LowMediumPollenLevel">		
 		<rdfs:label xml:lang="en">Low Medium Pollen Level</rdfs:label>
 		<rdfs:comment xml:lang="en"></rdfs:comment>
@@ -170,53 +965,7 @@
 	</owl:Class>
 
  	     
- 	     <!-- ####################################################################################
- 	     ################# PATIENT SCENARIO: age, weight, etc. ############## 
- 	     #################################################################################### -->
- 	      
- 	<owl:Class rdf:ID="Patient">		
-		<rdfs:subClassOf rdf:resource="https://schema.org/Person"/>	
-		<foaf:age rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>	
-		<schema:height rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal"/>	
-		<schema:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal"/>	
-		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-08-07</dcterms:modified> 
-        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-08-07</dcterms:issued>
-        <rdfs:seeAlso rdf:resource="http://dbpedia.org/ontology/Person"/>
-		<rdfs:seeAlso rdf:resource="http://xmlns.com/foaf/0.1/Person"/>	
-		<rdfs:label xml:lang="en">Patient</rdfs:label>
-        <rdfs:comment xml:lang="en">Description of the patient. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
-	</owl:Class>
-	
-	<!-- person datatype properties
-		but for generic reasoning mechanism better as classes and subclass of sosa:ObservableProperty -->
-	
-	<!--
-	
-	<owl:Class rdf:about="http://purl.org/kao#Age">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
-        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-07-17</dcterms:issued>
-        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-08-07</dcterms:modified>
-        <rdfs:label xml:lang="en">Age of the patient</rdfs:label>
-        <rdfs:comment xml:lang="en">Age of the patient. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
-      </owl:Class>     
-    
-    <owl:Class rdf:about="http://purl.org/kao#Height">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
-        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-08-07</dcterms:issued>
-        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-08-07</dcterms:modified>
-        <rdfs:label xml:lang="en">Height of the patient</rdfs:label>
-        <rdfs:comment xml:lang="en">Height of the patient. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
-    </owl:Class>
-    
-     <owl:Class rdf:about="http://purl.org/kao#Weight">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
-        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-07-17</dcterms:issued>
-        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-08-07</dcterms:modified>
-        <rdfs:label xml:lang="en">Weight of the patient</rdfs:label>
-        <rdfs:comment xml:lang="en">Weight of the patient. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
-    </owl:Class>
-    
-   -->
+ 	    
  	     
  	      <!-- ####################################################################################
  	     ################# BMI SCENARIO ############## 
@@ -483,30 +1232,7 @@
  	     <!-- ####################################################################################
  	     ################# PEAK FLOW METER ############## 
  	     #################################################################################### -->
- 	     
- 	 <owl:Class rdf:ID="AsthmaGreenZone">		
-		<rdfs:label xml:lang="en">Asthma Green Zone</rdfs:label>
-		<rdfs:comment xml:lang="en">Green Zone: 80 to 100 percent of your usual or "normal" peak flow rate signals all clear. A reading in this zone means that your asthma is under reasonably good control. It would be advisable to continue your prescribed program of management. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
-		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
-		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:modified> 
-        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:issued>
-	</owl:Class>
-	
-	 <owl:Class rdf:ID="AsthmaYellowZone">		
-		<rdfs:label xml:lang="en">Asthma Yellow Zone</rdfs:label>
-		<rdfs:comment xml:lang="en">Yellow Zone: 50 to 80 percent of your usual or "normal" peak flow rate signals caution. It is a time for decisions. Your airways are narrowing and may require extra treatment. Your symptoms can get better or worse depending on what you do, or how and when you use your prescribed medication. You and your healthcare provider should have a plan for yellow zone readings. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
-		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
-		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:modified> 
-        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:issued>
-	</owl:Class>
-		    
-	  <owl:Class rdf:ID="AsthmaRedZone">		
-		<rdfs:label xml:lang="en">Asthma Red Zone</rdfs:label>
-		<rdfs:comment xml:lang="en">Red Zone: Less than 50 percent of your usual or "normal" peak flow rate signals a Medical Alert. Immediate decisions and actions need to be taken. Severe airway narrowing may be occurring. Take your rescue medications right away. Contact your healthcare provider now and follow the plan he has given you for red zone readings. Some healthcare providers may suggest zones with a smaller range, such as 90 to 100 percent. Always follow your healthcare provider's suggestions about your peak flow rate. Useful for kHealth projects (asthma, bariatric surgery, etc.) at Knoesis.</rdfs:comment>
-		<rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/ObservableProperty"/>
-		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:modified> 
-        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-29</dcterms:issued>
-	</owl:Class>
+
 	
 	<!-- ####################################################################################
  	     ################# PEAK FLOW METER Description ############## 
@@ -680,187 +1406,29 @@
         <rdfs:label xml:lang="en">Therapy</rdfs:label>
     </owl:Class>
 	
-	 <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000089 -->
+	 <!-- not used within our project -->
 
+<!-- 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000089">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-EPI_0000036"/>
         <rdfs:label xml:lang="en">Other</rdfs:label>
     </owl:Class>
     
+     -->
 
 
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090 -->
-
+    	 <!-- not used within our project -->
+<!-- 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-EPI_0000036"/>
         <rdfs:label xml:lang="en">Reliever</rdfs:label>
     </owl:Class>
     
+  -->
 
 
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091 -->
+ 
 
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-EPI_0000036"/>
-        <rdfs:label xml:lang="en">Controller</rdfs:label>
-    </owl:Class>
-	
-		<!-- ####################################################################################
- 	     ################# AO Controller Hierarchy ############## 
- 	     #################################################################################### -->
-	
-	
-	    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000109 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000109">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Long-acting bronchodiltator</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000110 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000110">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Levalbuterol</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000111 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000111">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Albuterol</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000112 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000112">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Mast cell stabilizer</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000113 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000113">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Cromolyn</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000114 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000114">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Salmeterol</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000115 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000115">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Theophyllines</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000117 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000117">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Nedocromil sodium</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000118 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000118">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Ketotifen</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000119 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000119">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Sodium chromoglycate</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000120 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000120">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Zafirlukast</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000121 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000121">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Montelukast</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000122 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000122">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Leukotriene receptor antagonists (LTRA)</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000123 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000123">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Inhaled corticosteriods</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000124 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000124">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Omalizumab</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000125 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000125">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Low-dose inhaled corticosteriods (ICS)</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000126 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000126">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000091"/>
-        <rdfs:label xml:lang="en">Corticosteroids</rdfs:label>
-    </owl:Class>
-	
 			<!-- ####################################################################################
  	     ################# AO Other Hierarchy ############## 
  	     #################################################################################### -->
@@ -868,10 +1436,12 @@
 	
 	  <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000092 -->
 
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000092">
+  <!--  <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000092">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000089"/>
         <rdfs:label xml:lang="en">Adjuncts used to administer therapies such as spacer devices</rdfs:label>
     </owl:Class>
+    
+    -->
 	
 
 	
@@ -880,161 +1450,98 @@
  	     #################################################################################### -->
 	
 	 <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000093 -->
+	 
+	 <!--
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000093">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Short-acting bronchodilator</rdfs:label>
     </owl:Class>
     
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000094 -->
-
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000094">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Muscarinic antagonists</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000095 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000095">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Xanthine bronchodilators</rdfs:label>
     </owl:Class>
-	
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000096 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000096">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Compound bronchodilators</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000097 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000097">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Ventilation</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000098 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000098">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Epinephrine</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000099 -->
-
+  
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000099">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Adrenaline</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000100 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000100">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Aminophylline</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000101 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000101">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Magnesium sulfate</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000102 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000102">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Heliox</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000103 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000103">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Inspired oxygen</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000104 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000104">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Nebulized ipratropium bromide</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000105 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000105">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Anticholinergics</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000106 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000106">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Anticholinergic bronchodilators: ipratropium, tiotroprium, aclidinum</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000107 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000107">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Beta agonist</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000108 -->
 
     <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000108">
         <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000090"/>
         <rdfs:label xml:lang="en">Short and long acting beta agonists</rdfs:label>
     </owl:Class>
+    
+    -->
 	
 		<!-- ####################################################################################
  	     ################# SYMPTOM HIERARCHY ############## 
  	     #################################################################################### -->
-	
-	<owl:DatatypeProperty rdf:ID="hasSymptom">
-		<rdfs:label xml:lang="en">hasSymptom</rdfs:label>
-		<rdfs:comment xml:lang="en"></rdfs:comment>
-	</owl:DatatypeProperty>
-	
-	
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-EPI_0000034 -->
 
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-EPI_0000034">
-        <rdfs:label xml:lang="en">Symptoms</rdfs:label>
-    </owl:Class>
+	
+	
+
 	
 	<!-- http://childhealthservicemodels.eu/asthma#MOCHA-Asthma_000083 -->
 
@@ -1091,32 +1598,6 @@
         <rdfs:label xml:lang="en">Cannot talk in full sentence</rdfs:label>
     </owl:Class>
 	
-
-	
-	
-			<!-- ####################################################################################
- 	     ################# AO ONTOLOGY RISK FACTORS HIERARCHY ############## 
- 	     #################################################################################### -->
-	
-	 <!-- http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000061 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000061">
-        <rdfs:label xml:lang="en">Risk factors</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000062 -->
-
-    <owl:Class rdf:about="http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000062">
-        <rdfs:subClassOf rdf:resource="http://childhealthservicemodels.eu/asthma#MOCHA-ADHD_000061"/>
-        <rdfs:label xml:lang="en">Allergens</rdfs:label>
-    </owl:Class>
-    
-
-
-  
-    
 			<!-- ####################################################################################
  	     ################# AO ONTOLOGY GENETIC HIERARCHY ############## 
  	     #################################################################################### -->
