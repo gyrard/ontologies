@@ -34,8 +34,8 @@
      xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
      xmlns:dc="http://purl.org/dc/elements/1.1/">
     <owl:Ontology rdf:about="http://purl.org/kao#">
-        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-01-14</dcterms:modified>
-        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.4</owl:versionInfo>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-01-16</dcterms:modified>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.5</owl:versionInfo>
         <dc:description xml:lang="en">The kHealth Asthma Ontology (kAO) is used to semantically annotate and deduce high level abstractions from datasets provided by the kHealth project.</dc:description>
         <dc:creator rdf:resource="mailto:amelie@knoesis.org"/>
         <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-19</dcterms:issued>
@@ -53,6 +53,9 @@
 	-->
 	
 	<!--	
+	
+	Last updated: January 2019
+	- allergy nuts scenario patient
 	
 	Last updated: November 2018
 	- medication concepts not fully compliant with AO ontology from BioPortal
@@ -85,6 +88,15 @@
  	     ################# Labels and comments are important for ontology matching, automatic documentation, etc. ############## 
  	     #################################################################################### -->
 
+
+	<owl:NamedIndividual rdf:about="http://purl.org/kao#Patient_scenario_test_allergy_nut">		
+		<rdfs:label xml:lang="en">PatientNut scenario test has allergies (e.g., nuts).</rdfs:label>
+		<rdfs:comment xml:lang="en">PatientNut scenario test has allergies (e.g., nuts).</rdfs:comment>
+		<rdf:type rdf:resource="https://schema.org/Person"/>
+		<kao:hasRiskFactor rdf:resource="http://kmi.open.ac.uk/projects/smartproducts/ontologies/food.owl#Nuts"/>	
+		<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-01-16</dcterms:modified> 
+        <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-01-16</dcterms:issued>
+	</owl:NamedIndividual>
 	 
 	 <!-- generate issue under protege if rdf:ID and not rdf:about -->
 	<owl:Class rdf:about="http://purl.org/kao#Patient">		
